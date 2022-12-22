@@ -4,9 +4,9 @@ import "./App.css";
 
 function App() {
   const [grid, setGrid] = useState([
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
+    [0, 1, 4, 2],
+    [2, 5, 3, 0],
+    [3, 4, 1, 5],
   ]);
 
   const [isReveled, setIsReveled] = useState(
