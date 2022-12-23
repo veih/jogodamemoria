@@ -2,6 +2,10 @@ import { useState } from "react";
 
 import "./App.css";
 
+interface Tcell {
+  row: number,
+  column: number
+}
 function App() {
   const [grid, setGrid] = useState([
     [0, 1, 4, 2],
@@ -15,16 +19,44 @@ function App() {
       .map(() => new Array(grid[0].length).fill(false))
   );
 
+  const [firstItem, setFirstItem] = useState<Tcell>();
+
   const handleSelectedCard = (row: number, column: number) => {
-    const newIsReveled = [...isReveled]
+    if (isReveled[row][column]) return
+    const card = grid[row][column];
+    const newIsReveled = [...isReveled];
     newIsReveled[row][column] = true;
-    setIsReveled(newIsReveled)
+
+    if (firstItem) {
+      const newFirstItem = grid[firstItem.row][firstItem.column];
+      if (newFirstItem !== card) {
+        setTimeout(() => {
+          newIsReveled[firstItem.row][firstItem.column] = false;
+          newIsReveled[row][column] = false;
+          setIsReveled([...newIsReveled]);
+        }, 1000);
+      } else {
+        const youWin = isReveled.flat().every((item) => item)
+        if (youWin) {
+          setTimeout(() => {
+            alert("You win!");
+          }, 1000);
+          
+        }
+      }
+      setFirstItem(undefined)
+    } else {
+      setFirstItem({
+        row: row,
+        column: column
+      });
+    }
+
     // número deve aparecer
     // clicar novamente e um segundo número deve aparecer
     // comparar os dois números:
     // se for igual sussesso
     // se for diferentes voltar os números ocutos
-    
   };
 
   return (
