@@ -37,3 +37,11 @@
     background-color: #c4c4c4;
     cursor: pointer;
 }
+
+.clicked {
+    cursor: not-allowed;
+}
+
+.clicked:hover {
+    background-color:#fff;
+}

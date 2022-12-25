@@ -40,7 +40,7 @@ function App() {
         if (youWin) {
           setTimeout(() => {
             alert("You win!");
-          }, 1000);
+          });
           
         }
       }
@@ -66,7 +66,9 @@ function App() {
           <div className="row" key={rowIndex}>
             {row.map((number, columnIndex) => (
               <div
-                className="card"
+                className={
+                  "card " + (isReveled[rowIndex][columnIndex] ? "clicked" : "")
+                }
                 key={columnIndex}
                 onClick={() => handleSelectedCard(rowIndex, columnIndex)}
               >
